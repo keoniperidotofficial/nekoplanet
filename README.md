@@ -1,73 +1,46 @@
-# Project Lighthouse
+# NekoPlanet Source
 
-[![Continuous Integration](https://github.com/LBPUnion/ProjectLighthouse/actions/workflows/ci.yml/badge.svg)](https://github.com/LBPUnion/ProjectLighthouse/actions/workflows/ci.yml)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/LBPUnion/ProjectLighthouse)
-![GitHub contributors](https://img.shields.io/github/contributors/LBPUnion/ProjectLighthouse)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LBPUnion/ProjectLighthouse)
-![Source Lines of Code](https://tokei.ekzhang.com/b1/github/LBPUnion/ProjectLighthouse)
+This is the source code for a joke LittleBigPlanet revival, NekoPlanet. I recently made this revival because I felt like it and I wanted to make it as a joke but I actually put some work into this silly Project Lighthouse fork.
 
-Project Lighthouse is a clean-room, open-source custom server for LittleBigPlanet. This is a project conducted by
-the LBP Union Ministry of Technology Research and Development team.
+# Requirements
+MySQL / MariaDB
+Apache (to launch MySQL/MariaDB)
+A brain
+Terminal
+DotNet 8.0
 
-For concerns and inquiries about the project, please contact us [here](https://www.lbpunion.com/contact).
+# How To Launch Website.
 
-## DISCLAIMERS (Please read!)
+go to the ProjectLighthouse.Website folder. Open a terminal inside that folder or redirect Command Prompt to that folder. Once you're in, run "dotnet build" and then run "dotnet run" and once it boots up for the first time, you should see a .configme file.
 
-### This is not a final product.
-This is **beta software**, and thus is **not stable nor is it secure**.
 
-While Project Lighthouse is in a mostly working state, **we ask that our software not be used in a production
-environment until release**.
+Go back to the ProjectLighthouse.Website folder, you should see a lighthouse.yml.configme file in the directory, edit it with your notepad, you can configure it however you want, it's your source now.
 
-This is because we have not entirely nailed security down yet, and **your instance WILL get attacked** as a result. It's
-happened before, and it'll happen again.
 
-Simply put, **Project Lighthouse is not ready for the public yet**.
+Once you're done configuring the configme, if you can see the file extension, remove the .configme and keep .yml so it'll be lighthouse.yml!
 
-In addition, we're not responsible if someone hacks your machine and wipes your database, so make frequent backups, and
-be sure to report any vulnerabilities. Thank you in advance.
 
-### We are not obligated to provide support.
+If you have all migrations correct, and if you have MySQL and Apache on, make the database in url "localhost/phpmyadmin" and make the database's name "lighthouse" or whatever name you chose for the database name in the lighthouse.yml file.
 
-Project Lighthouse is open source. However, it is licensed under the GNU Affero General Public License version 3 (AGPLv3)
-meaning that Project Lighthouse is provided to you as-is, with **absolutely no warranty.**
 
-Please understand that while this license gives you freedom to do pretty much anything you would want to do, including
-allowing you to run your instance,
-**this doesn't mean we are obligated to support you or your instance**. When you set up an instance of Project
-Lighthouse, you are entirely on your own.
+Run the terminal again and run "dotnet run", if all is successful, the website will run with no errors! the username and password should be "admin" and "lighthouse". it will ask you to setup 2FA and to change your password, that's normal, just do what it asks you to do. and change the "admin" username to what your RPCSN or PSN username is to connect to the servers you are running.
 
-### Sony is not related nor liable.
 
-[//]: # (Referenced from https://www.lbpunion.com/post/project-lighthouse-littlebigplanet-private-servers)
+and that's it! to add CSS to the website, go back to the ProjectLighthouse.Website folder and there should be a folder name "StaticFiles". go on it, make a new folder inside that folder and name the new folder "css" all lowercase, and then you can start making your cool new "styles.css" that'll be the talk to the LittleBigPlanet community! either that or a laughing stock.
 
-It is very important to stress that the LBP Union and Project Lighthouse is not affiliated with Sony Group
-Corporation *(collectively referred to as “Sony”)* and its subordinate entities and studios. We are not the official
-developers of LittleBigPlanet or it's online services. Project Lighthouse is a clean-room reimplementation of its
-server, not the official servers.
 
-By using Project Lighthouse you release Sony, as well as any employees or agents of Sony, from any and all liability,
-corporate, or personal loss caused to you or others by the use of Project Lighthouse or any features we provide.
 
-## Building
+# How to launch GameServer.
 
-This will be written when we're out of beta. Consider this your barrier to entry ;).
 
-It is recommended to build with `Release` if you plan to use Lighthouse in a production environment.
+Go back to your main directory on where you have all of the ProjectLighthouse folders, go on ProjectLighthouse.GameServer folder. that's where the gameserver lives in.
 
-## Contributing
 
-Please see [`CONTRIBUTING.md`](https://github.com/LBPUnion/ProjectLighthouse/blob/main/CONTRIBUTING.md) for more
-information.
+Open a new terminal, run "dotnet build" and after it builds, run "dotnet run", it should make a new file named "lighthouse.yml.configme", same as how you did with the website, config all you want to make your Lighthouse / NekoPlanet instance unique. and like the website tutorial, make the file connect to the database. and once you finish configging the yml. change the file extension from "yml.configme" to just "yml".
 
-## Compatibility across games and platforms
 
-| Game     | Console (PS3/Vita/PSP) | Emulator (RPCS3/Vita3k/PPSSPP)            | Next-Gen (PS4/PS5/Adrenaline) |
-|----------|------------------------|-------------------------------------------|-------------------------------|
-| LBP1     | Compatible             | Compatible                                | No next-gen equivalent        |
-| LBP2     | Compatible             | Compatible                                | No next-gen equivalent        |
-| LBP3     | Compatible             | Compatible                                | Incompatible                  |
-| LBP Vita | Compatible             | Incompatible, PSN not supported on Vita3k | No next-gen equivalent        |
-| LBP PSP  | Potentially compatible | Incompatible, PSN not supported on PPSSPP | Potentially Compatible        |
+it will run all of the migrations again for some reason, but don't worry, if all goes right, it will start up and run on localhost:10060/LITTLEBIGPLANET_XML!
 
-Project Lighthouse is mostly a work in progress, so this chart is subject to change at any point.
+
+
+# and that's how you start your very own Lighthouse or NekoPlanet instance! have fun and remember. Play, Create and Share! :3
