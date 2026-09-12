@@ -2,6 +2,7 @@
 using LBPUnion.ProjectLighthouse;
 using LBPUnion.ProjectLighthouse.Database;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+
 namespace ProjectLighthouse.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
@@ -10,18 +11,12 @@ namespace ProjectLighthouse.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Resource",
-                table: "Slots",
-                newName: "ResourceCollection");
+            migrationBuilder.Sql("ALTER TABLE Slots CHANGE `Resource` `ResourceCollection` LONGTEXT;");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "ResourceCollection",
-                table: "Slots",
-                newName: "Resource");
+            migrationBuilder.Sql("ALTER TABLE Slots CHANGE `ResourceCollection` `Resource` LONGTEXT;");
         }
     }
 }

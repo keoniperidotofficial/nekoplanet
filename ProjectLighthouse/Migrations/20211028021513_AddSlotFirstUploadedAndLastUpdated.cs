@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using LBPUnion.ProjectLighthouse;
 using LBPUnion.ProjectLighthouse.Database;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+
 namespace ProjectLighthouse.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
@@ -11,10 +12,7 @@ namespace ProjectLighthouse.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Timestamp",
-                table: "Slots",
-                newName: "LastUpdated");
+            migrationBuilder.Sql("ALTER TABLE Slots CHANGE `Timestamp` `LastUpdated` DATETIME;");
 
             migrationBuilder.AddColumn<long>(
                 name: "FirstUploaded",
@@ -30,10 +28,7 @@ namespace ProjectLighthouse.Migrations
                 name: "FirstUploaded",
                 table: "Slots");
 
-            migrationBuilder.RenameColumn(
-                name: "LastUpdated",
-                table: "Slots",
-                newName: "Timestamp");
+            migrationBuilder.Sql("ALTER TABLE Slots CHANGE `LastUpdated` `Timestamp` DATETIME;");
         }
     }
 }

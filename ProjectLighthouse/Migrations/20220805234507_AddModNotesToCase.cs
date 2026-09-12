@@ -1,4 +1,5 @@
-﻿using LBPUnion.ProjectLighthouse;
+﻿using System;
+using LBPUnion.ProjectLighthouse;
 using LBPUnion.ProjectLighthouse.Database;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -15,11 +16,7 @@ namespace ProjectLighthouse.Migrations
         {
             migrationBuilder.Sql("UPDATE Users SET PermissionLevel = PermissionLevel - 1;");
             migrationBuilder.Sql("UPDATE Users SET PermissionLevel = -3 WHERE PermissionLevel = -1;");
-            
-            migrationBuilder.RenameColumn(
-                name: "Description",
-                table: "Cases",
-                newName: "Reason");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `Description` `Reason` LONGTEXT;");
 
             migrationBuilder.AddColumn<string>(
                 name: "ModeratorNotes",
@@ -38,18 +35,9 @@ namespace ProjectLighthouse.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ModeratorNotes",
-                table: "Cases");
-
-            migrationBuilder.DropColumn(
-                name: "Processed",
-                table: "Cases");
-
-            migrationBuilder.RenameColumn(
-                name: "Reason",
-                table: "Cases",
-                newName: "Description");
+            migrationBuilder.DropColumn("ModeratorNotes", "Cases");
+            migrationBuilder.DropColumn("Processed", "Cases");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `Reason` `Description` LONGTEXT;");
         }
     }
 }

@@ -15,40 +15,12 @@ namespace ProjectLighthouse.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("DELETE FROM Cases;");
-            
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cases_Users_CaseCreatorId",
-                table: "Cases");
 
-            migrationBuilder.RenameColumn(
-                name: "CaseType",
-                table: "Cases",
-                newName: "Type");
-
-            migrationBuilder.RenameColumn(
-                name: "CaseExpires",
-                table: "Cases",
-                newName: "ExpiresAt");
-
-            migrationBuilder.RenameColumn(
-                name: "CaseDescription",
-                table: "Cases",
-                newName: "Description");
-
-            migrationBuilder.RenameColumn(
-                name: "CaseCreatorId",
-                table: "Cases",
-                newName: "CreatorId");
-
-            migrationBuilder.RenameColumn(
-                name: "CaseCreated",
-                table: "Cases",
-                newName: "CreatedAt");
-
-            migrationBuilder.RenameIndex(
-                name: "FK_Cases_Users_CaseCreatorId",
-                table: "Cases",
-                newName: "FK_Cases_Users_CreatorId");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `CaseType` `Type` VARCHAR(255);");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `CaseExpires` `ExpiresAt` DATETIME;");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `CaseDescription` `Description` LONGTEXT;");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `CaseCreatorId` `CreatorId` INT;");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `CaseCreated` `CreatedAt` DATETIME;");
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "DismissedAt",
@@ -85,55 +57,17 @@ namespace ProjectLighthouse.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cases_Users_CreatorId",
-                table: "Cases");
+            migrationBuilder.DropForeignKey("FK_Cases_Users_CreatorId", "Cases");
+            migrationBuilder.DropForeignKey("FK_Cases_Users_DismisserId", "Cases");
+            migrationBuilder.DropIndex("IX_Cases_DismisserId", "Cases");
+            migrationBuilder.DropColumn("DismissedAt", "Cases");
+            migrationBuilder.DropColumn("DismisserId", "Cases");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cases_Users_DismisserId",
-                table: "Cases");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Cases_DismisserId",
-                table: "Cases");
-
-            migrationBuilder.DropColumn(
-                name: "DismissedAt",
-                table: "Cases");
-
-            migrationBuilder.DropColumn(
-                name: "DismisserId",
-                table: "Cases");
-
-            migrationBuilder.RenameColumn(
-                name: "Type",
-                table: "Cases",
-                newName: "CaseType");
-
-            migrationBuilder.RenameColumn(
-                name: "ExpiresAt",
-                table: "Cases",
-                newName: "CaseExpires");
-
-            migrationBuilder.RenameColumn(
-                name: "Description",
-                table: "Cases",
-                newName: "CaseDescription");
-
-            migrationBuilder.RenameColumn(
-                name: "CreatorId",
-                table: "Cases",
-                newName: "CaseCreatorId");
-
-            migrationBuilder.RenameColumn(
-                name: "CreatedAt",
-                table: "Cases",
-                newName: "CaseCreated");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Cases_CreatorId",
-                table: "Cases",
-                newName: "IX_Cases_CaseCreatorId");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `Type` `CaseType` VARCHAR(255);");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `ExpiresAt` `CaseExpires` DATETIME;");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `Description` `CaseDescription` LONGTEXT;");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `CreatorId` `CaseCreatorId` INT;");
+            migrationBuilder.Sql("ALTER TABLE Cases CHANGE `CreatedAt` `CaseCreated` DATETIME;");
 
             migrationBuilder.AddColumn<bool>(
                 name: "Banned",

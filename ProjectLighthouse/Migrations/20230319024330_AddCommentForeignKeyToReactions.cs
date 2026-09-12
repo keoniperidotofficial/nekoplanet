@@ -12,23 +12,11 @@ namespace ProjectLighthouse.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // In case there are reactions with a null comment
-            migrationBuilder.Sql("delete r from Reactions r left join Comments c on r.TargetId = c.CommentId where c.CommentId is null;");
+            migrationBuilder.Sql("DELETE r FROM Reactions r LEFT JOIN Comments c ON r.TargetId = c.CommentId WHERE c.CommentId IS NULL;");
+            migrationBuilder.Sql("ALTER TABLE Reactions CHANGE `TargetId` `CommentId` INT;");
 
-            migrationBuilder.RenameColumn(
-                name: "TargetId",
-                table: "Reactions",
-                newName: "CommentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reactions_CommentId",
-                table: "Reactions",
-                column: "CommentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reactions_UserId",
-                table: "Reactions",
-                column: "UserId");
+            migrationBuilder.CreateIndex("IX_Reactions_CommentId", "Reactions", "CommentId");
+            migrationBuilder.CreateIndex("IX_Reactions_UserId", "Reactions", "UserId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Reactions_Comments_CommentId",
@@ -49,26 +37,11 @@ namespace ProjectLighthouse.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Reactions_Comments_CommentId",
-                table: "Reactions");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Reactions_Users_UserId",
-                table: "Reactions");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Reactions_CommentId",
-                table: "Reactions");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Reactions_UserId",
-                table: "Reactions");
-
-            migrationBuilder.RenameColumn(
-                name: "CommentId",
-                table: "Reactions",
-                newName: "TargetId");
+            migrationBuilder.DropForeignKey("FK_Reactions_Comments_CommentId", "Reactions");
+            migrationBuilder.DropForeignKey("FK_Reactions_Users_UserId", "Reactions");
+            migrationBuilder.DropIndex("IX_Reactions_CommentId", "Reactions");
+            migrationBuilder.DropIndex("IX_Reactions_UserId", "Reactions");
+            migrationBuilder.Sql("ALTER TABLE Reactions CHANGE `CommentId` `TargetId` INT;");
         }
     }
 }

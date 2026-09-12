@@ -14,18 +14,8 @@ namespace ProjectLighthouse.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Comments_Users_TargetUserId",
-                table: "Comments");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Comments_TargetUserId",
-                table: "Comments");
-
-            migrationBuilder.RenameColumn(
-                name: "TargetUserId",
-                table: "Comments",
-                newName: "TargetId");
+            migrationBuilder.Sql("ALTER TABLE Comments CHANGE `TargetUserId` `TargetId` INT;");
 
             migrationBuilder.AddColumn<bool>(
                 name: "Deleted",
@@ -93,10 +83,7 @@ namespace ProjectLighthouse.Migrations
                 name: "Type",
                 table: "Comments");
 
-            migrationBuilder.RenameColumn(
-                name: "TargetId",
-                table: "Comments",
-                newName: "TargetUserId");
+            migrationBuilder.Sql("ALTER TABLE Comments CHANGE `TargetId` `TargetUserId` INT;");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_TargetUserId",

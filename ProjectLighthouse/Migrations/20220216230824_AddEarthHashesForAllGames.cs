@@ -13,11 +13,8 @@ namespace ProjectLighthouse.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "PlanetHash",
-                table: "Users",
-                newName: "PlanetHashLBP2");
-            
+            migrationBuilder.Sql("ALTER TABLE Users CHANGE `PlanetHash` `PlanetHashLBP2` LONGTEXT;");
+
             migrationBuilder.AddColumn<string>(
                 name: "PlanetHashLBP3",
                 table: "Users",
@@ -43,10 +40,7 @@ namespace ProjectLighthouse.Migrations
                 name: "PlanetHashLBP3",
                 table: "Users");
 
-            migrationBuilder.RenameColumn(
-                name: "PlanetHashLBPVita",
-                table: "Users",
-                newName: "PlanetHash");
+            migrationBuilder.Sql("ALTER TABLE Users CHANGE `PlanetHashLBPVita` `PlanetHash` LONGTEXT;");
         }
     }
 }

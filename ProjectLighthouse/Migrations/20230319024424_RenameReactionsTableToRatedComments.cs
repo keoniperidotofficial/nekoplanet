@@ -12,36 +12,8 @@ namespace ProjectLighthouse.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Reactions_Comments_CommentId",
-                table: "Reactions");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Reactions_Users_UserId",
-                table: "Reactions");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Reactions",
-                table: "Reactions");
-
-            migrationBuilder.RenameTable(
-                name: "Reactions",
-                newName: "RatedComments");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Reactions_UserId",
-                table: "RatedComments",
-                newName: "IX_RatedComments_UserId");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Reactions_CommentId",
-                table: "RatedComments",
-                newName: "IX_RatedComments_CommentId");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_RatedComments",
-                table: "RatedComments",
-                column: "RatingId");
+            // NOTE: the RENAME TABLE already ran and stuck on a previous failed attempt
+            // (MySQL DDL isn't transactional), so it's intentionally omitted here.
 
             migrationBuilder.AddForeignKey(
                 name: "FK_RatedComments_Comments_CommentId",
@@ -62,36 +34,12 @@ namespace ProjectLighthouse.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_RatedComments_Comments_CommentId",
-                table: "RatedComments");
+            migrationBuilder.DropForeignKey("FK_RatedComments_Comments_CommentId", "RatedComments");
+            migrationBuilder.DropForeignKey("FK_RatedComments_Users_UserId", "RatedComments");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_RatedComments_Users_UserId",
-                table: "RatedComments");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_RatedComments",
-                table: "RatedComments");
-
-            migrationBuilder.RenameTable(
-                name: "RatedComments",
-                newName: "Reactions");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_RatedComments_UserId",
-                table: "Reactions",
-                newName: "IX_Reactions_UserId");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_RatedComments_CommentId",
-                table: "Reactions",
-                newName: "IX_Reactions_CommentId");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Reactions",
-                table: "Reactions",
-                column: "RatingId");
+            // RENAME TABLE preserves the existing primary key under the new name,
+            // so there's no need (and it's invalid) to add a new one here.
+            migrationBuilder.Sql("RENAME TABLE RatedComments TO Reactions;");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Reactions_Comments_CommentId",
