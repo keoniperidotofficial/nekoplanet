@@ -4,9 +4,13 @@ This is the source code for a joke LittleBigPlanet revival, NekoPlanet. I recent
 
 # Requirements
 MySQL / MariaDB
+
 Apache (to launch MySQL/MariaDB)
+
 A brain
+
 Terminal
+
 DotNet 8.0
 
 # How To Launch Website.
@@ -28,6 +32,7 @@ Run the terminal again and run "dotnet run", if all is successful, the website w
 
 and that's it! to add CSS to the website, go back to the ProjectLighthouse.Website folder and there should be a folder name "StaticFiles". go on it, make a new folder inside that folder and name the new folder "css" all lowercase, and then you can start making your cool new "styles.css" that'll be the talk to the LittleBigPlanet community! either that or a laughing stock.
 
+UPDATE 10/25/26: ok so like apparently, the site needs a thing called "semantic.min.css" for the styling, so you can find one on the internet or on https://github.com/Semantic-Org/Semantic-UI-CSS/blob/master/semantic.min.css ! so yeah, you can either write your own css & delete the semantic.min.css requirements (figure that out yourself) or be a lazy party pooper and just put the file in the css folder you made in StaticFiles.
 
 
 # How to launch GameServer.
